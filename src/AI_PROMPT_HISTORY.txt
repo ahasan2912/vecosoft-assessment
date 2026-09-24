@@ -1,0 +1,135 @@
+--- Prompt 1: Planning --- 
+Act as a Principal Frontend Engineer and Senior UI/UX Designer. Build a modern, professional, responsive mobile Order Tracking application for an e-commerce platform based on the following task requirements.
+
+---
+
+### Project Stack & Requirements
+1. Tech Stack: React (or Next.js), Tailwind CSS, Lucide Icons, and React State management.
+2. Target Screen: Mobile viewports (responsive between 360px and 430px width).
+3. Data Source: Mock/Static JSON data with state switching capability. No backend required.
+
+---
+
+### Core UI & UX Requirements
+- Visual Delivery Progress Timeline: Clear step-by-step visual tracker (e.g., Order Placed -> Processing -> Shipped -> Out for Delivery -> Delivered) with status badges and timestamps.
+- Current Order Status: Clear header banner reflecting current status.
+- Estimated Delivery Information: Estimated date, time window, or contextual delivery notes.
+- Product & Order Summary: Expandable/collapsible item details, image thumbnail, quantity, price, order ID, and payment summary.
+- Customer Support & Actions: Quick action buttons to "Contact Support", "Call Courier", or "Report an Issue".
+- State Switcher (Demo Controls): Provide a subtle top bar or floating toggle to instantly switch between the normal view and the 3 required edge-case scenarios below.
+
+---
+
+### 3 Mandatory Edge-Case Scenarios to Handle
+
+1. Delayed Order Scenario:
+   - Condition: Estimated delivery time has passed or order is significantly delayed.
+   - UI Response: Display a prominent notice/warning banner, explain the reason (e.g., severe weather or high volume), update estimated arrival date, and provide actionable next steps (e.g., "Request Update" button or "Chat with Support").
+
+2. Delivered but Not Received Scenario:
+   - Condition: Status shows "Delivered", but user clicks a flag or toggles "I didn't receive this".
+   - UI Response: Display an urgent resolution panel showing delivery details (photo proof placeholder, drop-off location note) and provide immediate recovery options (e.g., "Check Security/Neighbours", "Report Missing Package", "Instant Refund/Support Ticket").
+
+3. Tracking Not Available Yet Scenario:
+   - Condition: Order placed recently, fulfillment in progress, tracking number not yet assigned by carrier.
+   - UI Response: Avoid empty or broken screens. Show an engaging preparation state (e.g., "Preparing your order", estimated time until dispatch, carrier assignment pending animation, and option to get SMS/Email alerts).
+
+---
+
+### Design & Micro-Interactions
+- Clean typography, smooth transitions, proper visual hierarchy, and professional spacing.
+- Interactive elements: Interactive tabs/buttons, modal or bottom sheet for contacting support, and interactive issue reporting flow.
+- Micro-states: Proper handling of visual active/completed/pending states in the timeline.
+
+---
+
+### Output Needed
+1. Complete, clean, and modular React component structure.
+2. Fully stylized with Tailwind CSS.
+3. Everything self-contained and ready to run locally.
+
+
+--- Prompt 2: Build --- 
+The plan has been created and reviewed. Now proceed with implementation based on the approved plan.
+
+Before coding:
+1. Re-read the assessment requirements and existing project structure.
+2. Follow the plan exactly, but make reasonable adjustments if the actual codebase requires them.
+3. Do not add unnecessary features that are outside the assessment requirements.
+4. Keep the implementation clean, readable, maintainable, and production-quality.
+5. Use mock/static data where backend integration is not required.
+6. Make the UI responsive across mobile, tablet, and desktop.
+7. Reuse components where appropriate and avoid unnecessary duplication.
+8. Do not overwrite or remove existing functionality unless required.
+9. After implementation, run the project and verify the result.
+10. Fix any build errors, TypeScript/ESLint errors, or obvious UI issues you encounter.
+
+Start implementing the task now.
+
+--- Prompt 3: Responsive screen issue --- 
+Refactor my current mobile-only Order Tracking screen to a modern, fully responsive Desktop-first / All-device layout using Tailwind CSS.
+
+Requirements:
+1. Large Screens (Desktop/Tablet):
+   - Use a two-column grid layout (e.g., 7 cols for Timeline & Status Alert, 5 cols for Order Summary & Help/Action buttons).
+   - Ensure spacious, clean typography and modern desktop card layouts.
+
+2. Small Screens (Mobile 360px - 430px):
+   - Gracefully stack all columns into a single-column layout.
+   - Maintain excellent mobile readability and tap target sizes.
+
+3. Keep all features intact:
+   - Scenario Switcher for the 3 required states (Delayed, Delivered but not received, Tracking not available).
+   - Dynamic Timeline, Status Alerts, Product Summary, and Support Action Modals.
+ 
+--- Prompt 4: Main Business Logic Problem ---
+The current UI layout and styling look great, but the internal business logic and dynamic state management are not working properly. Refactor the code so that all UI elements dynamically react based on the selected demo scenario without breaking the design.
+
+### Required State & Logic Functionality
+
+1. State Switcher Integration:
+   - When "Normal" is selected:
+     * Status Badge: "Out for Delivery"
+     * Banner: Standard progress info ("Your courier is on the way").
+     * Timeline: Show "Order Placed", "Processing", and "Shipped" as completed (green icons). "Out for Delivery" as active/current.
+     * Estimated Delivery: Show a future date (e.g., Thu, Sep 24).
+
+   - When "Delayed" is selected:
+     * Condition: Estimated delivery date has passed or delayed.
+     * Banner: Display a clear warning/alert banner (Orange/Red) stating the delay reason (e.g., "Severe weather conditions caused a delay").
+     * Estimated Delivery: Show an updated new ETA with a "Delayed" badge.
+     * Action Button: Highlight "Get Delay Update" or "Contact Support".
+
+   - When "Missing" (Delivered but Not Received) is selected:
+     * Condition: System shows delivered, but customer hasn't received it.
+     * Banner: Show "Delivered on Sep 23" along with a photo proof placeholder or drop-off note.
+     * Timeline: All steps up to "Delivered" marked complete.
+     * Urgent CTA: Show a prominent "I Didn't Receive This Package" button that opens an Issue Resolution Modal / Support Ticket.
+
+   - When "Preparing" (Tracking Not Available) is selected:
+     * Condition: Order placed recently, tracking info pending.
+     * Banner: Show a friendly "Preparing Your Order" state.
+     * Timeline: Only "Order Placed" is completed; "Processing" is pulsing; courier/tracking number section shows "Assigning Carrier...".
+     * Action Button: Show "Enable SMS Alerts" or "Notify Me".
+
+2. Technical Logic Requirements:
+   - Create a central `orderState` object or React `useState` containing data for all 4 states.
+   - When a switcher button is clicked, update the main state so that the Header, Timeline, Delivery Date, and Action Cards automatically change their text, colors, icons, and CTA behavior.
+   - Keep the existing Tailwind grid layout, card spacing, and component structure intact.
+ 
+--- Prompt 5:Dalivary Logic Isuues ---
+Fix the calendar date inconsistency and delayed order business logic in my application:
+
+1. Correct the Date Logic:
+   - Fix the day/date mapping (Sep 23 is Wednesday, Sep 24 is Thursday, Sep 25 is Friday).
+   - If the scenario is "Normal", set the Estimated Delivery Date to a FUTURE date (e.g., Friday, Sep 25, 2026).
+
+2. Implement Dynamic Delay Logic:
+   - If the Estimated Delivery Date is set to a PAST date (e.g., Sep 23) OR if the user switches to the "Delayed" scenario:
+     * Automatically display a prominent Orange/Red Delayed Warning Banner at the top of the left column.
+     * Banner text: "Shipment Delayed: Your order is running late due to unforeseen logistics delay."
+     * Show a "New Estimated Delivery Date" badge (e.g., Sep 25).
+     * Change the primary action button to "Request Priority Update" or "Chat with Support".
+
+Keep the current UI layout identical, but fix these state and logic triggers cleanly in React.
+ 
