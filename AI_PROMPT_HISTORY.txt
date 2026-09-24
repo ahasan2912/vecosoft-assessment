@@ -1,14 +1,10 @@
 --- Prompt 1: Planning --- 
 Act as a Principal Frontend Engineer and Senior UI/UX Designer. Build a modern, professional, responsive mobile Order Tracking application for an e-commerce platform based on the following task requirements.
 
----
-
 ### Project Stack & Requirements
 1. Tech Stack: React (or Next.js), Tailwind CSS, Lucide Icons, and React State management.
 2. Target Screen: Mobile viewports (responsive between 360px and 430px width).
 3. Data Source: Mock/Static JSON data with state switching capability. No backend required.
-
----
 
 ### Core UI & UX Requirements
 - Visual Delivery Progress Timeline: Clear step-by-step visual tracker (e.g., Order Placed -> Processing -> Shipped -> Out for Delivery -> Delivered) with status badges and timestamps.
@@ -17,8 +13,6 @@ Act as a Principal Frontend Engineer and Senior UI/UX Designer. Build a modern, 
 - Product & Order Summary: Expandable/collapsible item details, image thumbnail, quantity, price, order ID, and payment summary.
 - Customer Support & Actions: Quick action buttons to "Contact Support", "Call Courier", or "Report an Issue".
 - State Switcher (Demo Controls): Provide a subtle top bar or floating toggle to instantly switch between the normal view and the 3 required edge-case scenarios below.
-
----
 
 ### 3 Mandatory Edge-Case Scenarios to Handle
 
@@ -34,20 +28,15 @@ Act as a Principal Frontend Engineer and Senior UI/UX Designer. Build a modern, 
    - Condition: Order placed recently, fulfillment in progress, tracking number not yet assigned by carrier.
    - UI Response: Avoid empty or broken screens. Show an engaging preparation state (e.g., "Preparing your order", estimated time until dispatch, carrier assignment pending animation, and option to get SMS/Email alerts).
 
----
-
 ### Design & Micro-Interactions
 - Clean typography, smooth transitions, proper visual hierarchy, and professional spacing.
 - Interactive elements: Interactive tabs/buttons, modal or bottom sheet for contacting support, and interactive issue reporting flow.
 - Micro-states: Proper handling of visual active/completed/pending states in the timeline.
 
----
-
 ### Output Needed
 1. Complete, clean, and modular React component structure.
 2. Fully stylized with Tailwind CSS.
 3. Everything self-contained and ready to run locally.
-
 
 --- Prompt 2: Build --- 
 The plan has been created and reviewed. Now proceed with implementation based on the approved plan.
